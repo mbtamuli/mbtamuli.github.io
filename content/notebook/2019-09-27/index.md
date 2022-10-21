@@ -8,10 +8,4 @@ EloquentJS.
 
 Also these are the greens I live for!
 
-{{< card
-img="solutions-green.png"
-command="Resize"
-options="900x"
-title="The Greens"
-subtitle="All test cases passing!"
->}}
+![The Greens](solutions-green.png)

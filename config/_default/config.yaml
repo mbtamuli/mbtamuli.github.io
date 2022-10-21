@@ -1,75 +1,77 @@
 baseURL: "http://mbtamuli.github.io/"
 languageCode: "en-us"
 title: "mbtamuli's scratchpad"
-theme: ["github.com/zwbetz-gh/papercss-hugo-theme"]
+theme:
+  - "github.com/adityatelange/hugo-PaperMod"
 
 permalinks:
     blog: /:section/:slug/
 
-params:
-  mainSections:
-  - blog
-
-taxonomies:
-  category: categories
-
 # To disable, set to an extremely large value, such as 999999
 paginate: 5
 
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
 enableEmoji: true
+pygmentsUseClasses: true
 
-related:
-  includeNewer: true
-  indices:
-  - name: categories
-    weight: 100
-  - name: date
-    weight: 10
-  threshold: 80
-  toLower: false
+minify:
+    disableXML: true
+    # minifyOutput: true
 
-menu:
-  nav:
-    - name: Blog
-      url: /
-      weight: 1
-    - name: Categories
-      url: /categories/
-      weight: 2
-    - name: Notebook
-      url: /notebook/
-      weight: 3
-    - name: About
-      url: /about/
-      weight: 4
+languages:
+    en:
+        languageName: "English"
+        weight: 1
+        taxonomies:
+          category: categories
+        menu:
+            main:
+                - name: Blog
+                  url: /blog/
+                  weight: 1
+                - name: Notebook
+                  url: /notebook/
+                  weight: 2
+                - name: Categories
+                  url: /categories/
+                  weight: 3
+                - name: About
+                  url: /about/
+                  weight: 4
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+params:
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    author: mbtamuli
+    defaultTheme: light
+    disableThemeToggle: false
+    ShowShareButtons: true
+    ShowReadingTime: true
+    disableSpecial1stPost: true
+    displayFullLangName: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    ShowRssButtonInSectionTermList: true
+    ShowToc: true
+    socialIcons:
+        - name: github
+          url: "https://github.com/mbtamuli"
+        - name: twitter
+          url: "https://twitter.com/mbtamuli"
+    mainSections:
+      - blog
 
 markup:
-  defaultMarkdownHandler: goldmark
-  goldmark:
-    extensions:
-      definitionList: true
-      footnote: true
-      linkify: true
-      strikethrough: true
-      table: true
-      taskList: true
-      typographer: true
-    parser:
-      attribute: true
-      autoHeadingID: true
-    renderer:
-      hardWraps: false
-      unsafe: true
-      xHTML: false
-  highlight:
-    codeFences: true
-    hl_Lines: ""
-    lineNoStart: 1
-    lineNos: false
-    lineNumbersInTable: true
-    noClasses: true
-    style: monokai
-    tabWidth: 4
-  tableOfContents:
-    endLevel: 6
-    startLevel: 2
+    goldmark:
+        renderer:
+            unsafe: true
