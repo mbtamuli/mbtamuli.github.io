@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://mbtamuli.github.io/sitemap.xml

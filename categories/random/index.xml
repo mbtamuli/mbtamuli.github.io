@@ -1,2 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>random on mbtamuli's scratchpad</title><link>http://mbtamuli.github.io/categories/random/</link><description>Recent content in random on mbtamuli's scratchpad</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://mbtamuli.github.io/categories/random/index.xml" rel="self" type="application/rss+xml"/><item><title>Why Functional Programming Matters</title><link>http://mbtamuli.github.io/blog/why-functional-programming-matters/</link><pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate><guid>http://mbtamuli.github.io/blog/why-functional-programming-matters/</guid><description>&lt;p>This article will be my take on why functional programming matters, largely with a focus on the paper with the same name, authored by John Hughes in the year 1984 - &lt;a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-paradigms/functional_programming/why-functional-programming-matters.pdf">Link to the paper&lt;/a>.&lt;/p></description></item><item><title>Keeping a Notebook</title><link>http://mbtamuli.github.io/blog/keeping-a-notebook/</link><pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate><guid>http://mbtamuli.github.io/blog/keeping-a-notebook/</guid><description>I recently came across this note and I could agree to all of the reasons mentioned for creating a Notebook. So here it is - /notebook.
-I have set my own format though, I&amp;rsquo;ll keep the name of the note as the date, and I&amp;rsquo;ll put multiple headings to separate the different topics I write about on each day. Some days I might not write anything due to whatever reason, but I will at least put the reason why I have not written, even if it is a single line.</description></item><item><title>Hello, World!</title><link>http://mbtamuli.github.io/blog/hello-world/</link><pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate><guid>http://mbtamuli.github.io/blog/hello-world/</guid><description>I feel it is necessary to start with Hello, World! when exploring anything new. That&amp;rsquo;s all for now. :)</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>random on mbtamuli&#39;s scratchpad</title>
+    <link>http://mbtamuli.github.io/categories/random/</link>
+    <description>Recent content in random on mbtamuli&#39;s scratchpad</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://mbtamuli.github.io/categories/random/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why Functional Programming Matters</title>
+      <link>http://mbtamuli.github.io/blog/why-functional-programming-matters/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://mbtamuli.github.io/blog/why-functional-programming-matters/</guid>
+      <description>&lt;p&gt;This article will be my take on why functional programming matters, largely with a focus on the paper with the same name, authored by John Hughes in the year 1984 - &lt;a href=&#34;https://github.com/papers-we-love/papers-we-love/blob/master/languages-paradigms/functional_programming/why-functional-programming-matters.pdf&#34;&gt;Link to the paper&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Keeping a Notebook</title>
+      <link>http://mbtamuli.github.io/blog/keeping-a-notebook/</link>
+      <pubDate>Tue, 17 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://mbtamuli.github.io/blog/keeping-a-notebook/</guid>
+      <description>I recently came across this note and I could agree to all of the reasons mentioned for creating a Notebook. So here it is - /notebook.
+I have set my own format though, I&amp;rsquo;ll keep the name of the note as the date, and I&amp;rsquo;ll put multiple headings to separate the different topics I write about on each day. Some days I might not write anything due to whatever reason, but I will at least put the reason why I have not written, even if it is a single line.</description>
+    </item>
+    
+    <item>
+      <title>Hello, World!</title>
+      <link>http://mbtamuli.github.io/blog/hello-world/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://mbtamuli.github.io/blog/hello-world/</guid>
+      <description>I feel it is necessary to start with Hello, World! when exploring anything new. That&amp;rsquo;s all for now. :)</description>
+    </item>
+    
+  </channel>
+</rss>
