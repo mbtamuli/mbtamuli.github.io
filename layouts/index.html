@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ $paginator := .Paginate (where site.RegularPages "Type" "in" site.Params.mainSections) }}
+
+{{ range $paginator.Pages.ByPublishDate.Reverse }}
+  <h2 class="post-list {{ if ne .Params.show_summary false }}summary{{ end }}">
+    <a href="{{ .RelPermalink }}">
+      {{ .Title }}
+    </a>
+  </h2>
+  <span class="badge secondary">{{ .Params.categories }}</span>
+  <span class="badge secondary">{{ .ReadingTime }} {{ if eq .ReadingTime 1 }}min{{ else }}mins{{end}}</span>
+  {{ if ne .Params.show_summary false }}
+    {{ .Summary }}
+  {{ end }}
+{{ end }}
+{{ template "partials/pagination.html" . }}
+{{ end }}
