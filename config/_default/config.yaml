@@ -1,3 +1,75 @@
 baseURL: "http://mbtamuli.github.io/"
 languageCode: "en-us"
 title: "mbtamuli's scratchpad"
+theme: ["github.com/zwbetz-gh/papercss-hugo-theme"]
+
+permalinks:
+    blog: /:section/:slug/
+
+params:
+  mainSections:
+  - blog
+
+taxonomies:
+  category: categories
+
+# To disable, set to an extremely large value, such as 999999
+paginate: 5
+
+enableEmoji: true
+
+related:
+  includeNewer: true
+  indices:
+  - name: categories
+    weight: 100
+  - name: date
+    weight: 10
+  threshold: 80
+  toLower: false
+
+menu:
+  nav:
+    - name: Blog
+      url: /
+      weight: 1
+    - name: Categories
+      url: /categories/
+      weight: 2
+    - name: Notebook
+      url: /notebook/
+      weight: 3
+    - name: About
+      url: /about/
+      weight: 4
+
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xHTML: false
+  highlight:
+    codeFences: true
+    hl_Lines: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4
+  tableOfContents:
+    endLevel: 6
+    startLevel: 2
