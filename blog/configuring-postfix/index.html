@@ -1,0 +1,83 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Hugo 0.104.3"><link rel=canonical href=http://mbtamuli.github.io/blog/configuring-postfix/><meta name=description content="I came across this really neat Docker image docker-postfix. It got me up and running with Postfix in a very short amount of time.
+I’m just mentioning the extra steps I had to take to get the TLS certificates and the DKIM keys. As this is a post of configuring Postfix running as a Docker container, I’ll also run all the setup steps inside containers.
+First let’s create a directory for all our files and pull all the images"><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#000000><meta name=msapplication-TileColor content="#ffffff"><meta name=theme-color content="#ffffff"><link rel=stylesheet type=text/css href=/css/paper.css><link rel=stylesheet type=text/css href=/css/custom.css><title>Configuring Postfix | mbtamuli's scratchpad</title></head><body><div class="container paper"><nav class="border split-nav"><div class=nav-brand><h3><a href=/>mbtamuli's scratchpad</a></h3></div><div class=collapsible><input id=collapsible1 type=checkbox name=collapsible1>
+<button>
+<label for=collapsible1><div class=bar1></div><div class=bar2></div><div class=bar3></div></label></button><div class=collapsible-body><ul class=inline><li><a href=/>Blog</a></li><li><a href=/categories/>Categories</a></li><li><a href=/notebook/>Notebook</a></li><li><a href=/about/>About</a></li></ul></div></div></nav><main><h1 class=post-title>Configuring Postfix</h1><strong>Publish date: </strong>Dec 30, 2018<br><strong>Categories:</strong>
+<a href=/categories/linux>linux</a>
+<a href=/categories/docker>docker</a><p>I came across this really neat Docker image
+<a href=https://github.com/catatnight/docker-postfix>docker-postfix</a>. It got me up
+and running with Postfix in a very short amount of time.</p><p>I&rsquo;m just mentioning the extra steps I had to take to get the TLS certificates
+and the DKIM keys. As this is a post of configuring Postfix running as a
+<strong>Docker</strong> container, I&rsquo;ll also run all the setup steps inside containers.</p><p>First let&rsquo;s create a directory for all our files and pull all the images</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir -p ~/postfix
+</span></span><span style=display:flex><span>docker pull certbot/dns-cloudflare
+</span></span><span style=display:flex><span>docker pull ubuntu
+</span></span><span style=display:flex><span>docker pull catatnight/postfix
+</span></span></code></pre></div><p>Now let&rsquo;s generate the keys. You can use
+<a href=https://github.com/certbot/certbot>certbot</a> which also has instructions on
+<a href=https://certbot.eff.org/docs/install.html#running-with-docker>running with docker</a>. In my case, I
+had the domain on Cloudflare, so I used the <a href=https://certbot-dns-cloudflare.readthedocs.io/en/stable/>dns-cloudflare plugin</a> which is available as
+an image <a href=https://hub.docker.com/r/certbot/dns-cloudflare>dns-cloudflare</a>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir -p ~/postfix/letsencrypt/etc
+</span></span><span style=display:flex><span>mkdir -p ~/postfix/letsencrypt/lib
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Add your email and token</span>
+</span></span><span style=display:flex><span>cat <span style=color:#e6db74>&lt;&lt;EOF &gt; ~/postfix/letsencrypt/cloudflare.ini
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>dns_cloudflare_email = cloudflare@example.com
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>dns_cloudflare_api_key = 0123456789abcdef0123456789abcdef01234567
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>EOF</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Add your email where you want to recieve emails from LetsEncypt and the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># domain for the mail</span>
+</span></span><span style=display:flex><span>docker run -it --rm <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--name certbot <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/letsencrypt/etc:/etc/letsencrypt&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/letsencrypt/lib:/var/lib/letsencrypt&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/letsencrypt/cloudflare.ini:/tmp/cloudflare.ini:ro&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>certbot/dns-cloudflare certonly <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--agree-tos <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--dns-cloudflare <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--dns-cloudflare-credentials /tmp/cloudflare.ini <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--dns-cloudflare-propagation-seconds <span style=color:#ae81ff>60</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--manual-public-ip-logging-ok <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--no-eff-email <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--renew-by-default
+</span></span><span style=display:flex><span>--text <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--email admin@example.com <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-d mail.example1.com
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Now we&#39;ll copy the generated certs to the proper location</span>
+</span></span><span style=display:flex><span>mkdir -p <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/certs&#34;</span>
+</span></span><span style=display:flex><span>cp /etc/letsencrypt/archive/mail.example.com/fullchain*.pem <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/certs/mail.example.com.crt&#34;</span>
+</span></span><span style=display:flex><span>cp /etc/letsencrypt/archive/mail.example.com/privkey*.pem <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/certs/mail.example.com.key&#34;</span>
+</span></span></code></pre></div><p>Now we&rsquo;ll generate the DKIM keys</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker run -it --rm <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--name dkim <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/dkim-tools:/data&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>ubuntu <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>bash
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># The following command will run inside the container</span>
+</span></span><span style=display:flex><span>apt update <span style=color:#f92672>&amp;&amp;</span> apt install opendkim-tools -y
+</span></span><span style=display:flex><span>cd /data
+</span></span><span style=display:flex><span>opendkim-genkey --selector<span style=color:#f92672>=</span>mail --domain<span style=color:#f92672>=</span>mail.example1.com
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exit from the container</span>
+</span></span><span style=display:flex><span>exit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>cp <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/dkim-tools/mail.private&#34;</span> <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/keys/&#34;</span>
+</span></span><span style=display:flex><span>cp <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/dkim-tools/mail.txt&#34;</span> <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/keys/&#34;</span>
+</span></span><span style=display:flex><span>cd <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/keys/&#34;</span>
+</span></span><span style=display:flex><span>chown opendkim:opendkim mail.private
+</span></span></code></pre></div><p>Now we have to add the DNS entry. If you take the look at the <code>mail.txt</code>, like</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cat mail.txt
+</span></span><span style=display:flex><span><span style=color:#75715e># OUTPUT</span>
+</span></span><span style=display:flex><span>mail._domainkey IN      TXT     <span style=color:#f92672>(</span> <span style=color:#e6db74>&#34;v=DKIM1; k=rsa; &#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34;p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2JynHFdaFJ+3esWnV3/ayG0rRAb8AxWa900ffYV22bpEYTO7WXAy5w1igWAEmtyzeRDlEngZAhw3GVQWsmSkydMTIvTNG9P1qXC+q23bxpq3yxxy8urqw42QusYV9n6HbU6dI6iNz0HJplQ95T6FFi7YAgzN8wuNCON0n9h9WSwIDAQAB&#34;</span> <span style=color:#f92672>)</span>  ; ----- DKIM key mail <span style=color:#66d9ef>for</span> mail.example.com
+</span></span></code></pre></div><p>You will have to add the TXT entry in your domain&rsquo;s DNS records.</p><p>For SPF record, you need to add the following as the value of a TXT entry for
+the domain. The key in our example will be mail.example.com. The IP 1.1.1.1 will
+be replaced by the public IP address of the instance.</p><pre tabindex=0><code>v=spf1 a include:_spf.google.com ip4:1.1.1.1 ~all
+</code></pre><p>For multiple IP address, just repeat the <code>ip4</code> block.</p><pre tabindex=0><code>v=spf1 a include:_spf.google.com ip4:1.1.1.1 ip4:2.2.2.2 ~all
+</code></pre><p>Lastly, we&rsquo;ll run the postfix container itself and run it in daemon mode.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker run -p 25:25 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-e maildomain<span style=color:#f92672>=</span>mail.example.com -e smtp_user<span style=color:#f92672>=</span>user1:mySecretPassword <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/keys:/etc/opendkim/domainkeys&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;</span>$HOME<span style=color:#e6db74>/postfix/certs:/etc/postfix/certs&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>--name postfix -d catatnight/postfix
+</span></span></code></pre></div><p>We&rsquo;ll now you just need to point whatever application you use to port 25, with
+the SMTP credentials <code>user1:mySecretPassword</code>. Enjoy emails that have a <a href=https://www.mail-tester.com>good score</a> and won&rsquo;t land up in spam!</p>Trying related<h3>See Also</h3><ul><li><a href=/blog/postfix-in-a-container/>Postfix in a container</a></li><li><a href=/blog/route-vpn-traffic/>Route VPN Traffic</a></li><li><a href=/blog/backup-work-git/>Backup files to git repo before shutdown</a></li></ul></main></div></body></html>

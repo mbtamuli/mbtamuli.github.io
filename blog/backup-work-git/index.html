@@ -1,0 +1,26 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Hugo 0.104.3"><link rel=canonical href=http://mbtamuli.github.io/blog/backup-work-git/><meta name=description content="I have a few files that I want to push to a remote repository just before shutdown. It could be many use cases, but mine is, I want my dotfiles synced to mbtamuli/dotfiles.
+Well, the approach is simple
+setup a small script to do git push have a systemd service What? You thought there’d be a ton of steps? Sorry to dissapoint. 😁 profit! 😎 Create another file and do whatever you need /usr/local/bin/backup_work."><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#000000><meta name=msapplication-TileColor content="#ffffff"><meta name=theme-color content="#ffffff"><link rel=stylesheet type=text/css href=/css/paper.css><link rel=stylesheet type=text/css href=/css/custom.css><title>Backup files to git repo before shutdown | mbtamuli's scratchpad</title></head><body><div class="container paper"><nav class="border split-nav"><div class=nav-brand><h3><a href=/>mbtamuli's scratchpad</a></h3></div><div class=collapsible><input id=collapsible1 type=checkbox name=collapsible1>
+<button>
+<label for=collapsible1><div class=bar1></div><div class=bar2></div><div class=bar3></div></label></button><div class=collapsible-body><ul class=inline><li><a href=/>Blog</a></li><li><a href=/categories/>Categories</a></li><li><a href=/notebook/>Notebook</a></li><li><a href=/about/>About</a></li></ul></div></div></nav><main><h1 class=post-title>Backup files to git repo before shutdown</h1><strong>Publish date: </strong>Jul 24, 2020<br><strong>Categories:</strong>
+<a href=/categories/linux>linux</a><p>I have a few files that I want to push to a remote repository just before shutdown. It could be many use cases, but mine is, I want my dotfiles synced to <a href=https://github.com/mbtamuli/dotfiles>mbtamuli/dotfiles</a>.</p><p>Well, the approach is simple</p><ul><li>setup a small script to do git push</li><li>have a systemd service</li><li>What? You thought there&rsquo;d be a ton of steps? Sorry to dissapoint. 😁</li><li>profit! 😎</li></ul><p>Create another file and do whatever you need <code>/usr/local/bin/backup_work.sh</code></p><pre tabindex=0><code>#!/bin/bash
+
+cd /path/to/git/repo
+git add .
+git commit -m &#34;Daily Backup&#34;
+git push origin master
+</code></pre><p>Add executable permissions</p><pre tabindex=0><code>chmod +x /usr/local/bin/backup_work.sh
+</code></pre><p>Create a file at <code>/etc/systemd/system/backup-work.service</code>. Change the user and group!</p><pre tabindex=0><code>[Unit]
+Description=Backup files to git repo
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+User=mbtamuli
+Group=mbtamuli
+ExecStart=/usr/local/bin/backup_work.sh
+
+[Install]
+WantedBy=halt.target reboot.target shutdown.target
+</code></pre>Trying related<h3>See Also</h3><ul><li><a href=/blog/route-vpn-traffic/>Route VPN Traffic</a></li><li><a href=/blog/configuring-postfix/>Configuring Postfix</a></li><li><a href=/blog/postfix-in-a-container/>Postfix in a container</a></li></ul></main></div></body></html>

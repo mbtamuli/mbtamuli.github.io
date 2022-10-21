@@ -1,0 +1,22 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=generator content="Hugo 0.104.3"><link rel=canonical href=http://mbtamuli.github.io/blog/postfix-in-a-container/><meta name=description content="Postfix is a service which forks itself and runs in the background. Postfix version 3.3.0 added container support. There was an issue where Postfix could not run as PID=1, and it was swiftly fixed in version 3.3.1
+As I could not find any official Docker image for the latest versin of Postfix, I decided to build one myself. At the time I built the image, there was no Debian package available so I had to compile the package from source."><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#000000><meta name=msapplication-TileColor content="#ffffff"><meta name=theme-color content="#ffffff"><link rel=stylesheet type=text/css href=/css/paper.css><link rel=stylesheet type=text/css href=/css/custom.css><title>Postfix in a container | mbtamuli's scratchpad</title></head><body><div class="container paper"><nav class="border split-nav"><div class=nav-brand><h3><a href=/>mbtamuli's scratchpad</a></h3></div><div class=collapsible><input id=collapsible1 type=checkbox name=collapsible1>
+<button>
+<label for=collapsible1><div class=bar1></div><div class=bar2></div><div class=bar3></div></label></button><div class=collapsible-body><ul class=inline><li><a href=/>Blog</a></li><li><a href=/categories/>Categories</a></li><li><a href=/notebook/>Notebook</a></li><li><a href=/about/>About</a></li></ul></div></div></nav><main><h1 class=post-title>Postfix in a container</h1><strong>Publish date: </strong>Aug 14, 2018<br><strong>Categories:</strong>
+<a href=/categories/linux>linux</a>
+<a href=/categories/docker>docker</a><p>Postfix is a service which forks itself and runs in the background. Postfix
+version <a href=http://www.postfix.org/announcements/postfix-3.3.0.html>3.3.0 added container support</a>.
+There was an issue where Postfix could not run as <em>PID=1</em>, and it was swiftly
+<a href=http://www.postfix.org/announcements/postfix-3.3.1.html>fixed in version 3.3.1</a></p><p>As I could not find any official Docker image for the latest versin of Postfix,
+I decided to build one myself. At the time I built the image, there was no
+Debian package available so I had to compile the package <a href=http://cdn.postfix.johnriley.me/mirrors/postfix-release/index.html>from source</a>.</p><p>Here is the link to <a href=https://github.com/EasyEngine/dockerfiles/blob/master/postfix/Dockerfile>the Dockerfile</a>.</p><p>You can build the docker image yourselves and use it too. Just run</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/EasyEngine/dockerfiles.git
+</span></span><span style=display:flex><span>cd postfix
+</span></span><span style=display:flex><span>docker build -t postfix .
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Now run the docker image using</span>
+</span></span><span style=display:flex><span>docker run <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-h example.com <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-p 1025:25 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v <span style=color:#e6db74>&#34;/dev/log:/dev/log&#34;</span>
+</span></span><span style=display:flex><span>postfix
+</span></span></code></pre></div><p>Now you can point in the smtp settings to use <code>localhost:1025</code>. The logs will
+be available at <code>/var/log/mail.log</code> on your host.</p>Trying related<h3>See Also</h3><ul><li><a href=/blog/configuring-postfix/>Configuring Postfix</a></li><li><a href=/blog/route-vpn-traffic/>Route VPN Traffic</a></li><li><a href=/blog/backup-work-git/>Backup files to git repo before shutdown</a></li></ul></main></div></body></html>
