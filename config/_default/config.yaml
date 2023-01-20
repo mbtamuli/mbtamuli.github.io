@@ -17,6 +17,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
+pluralizeListTitles: false
 
 minify:
     disableXML: true
