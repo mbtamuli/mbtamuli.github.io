@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>docker on mbtamuli&#39;s scratchpad</title>
+    <title>Docker on mbtamuli&#39;s scratchpad</title>
     <link>http://mbtamuli.github.io/categories/docker/</link>
-    <description>Recent content in docker on mbtamuli&#39;s scratchpad</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in Docker on mbtamuli&#39;s scratchpad</description>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 30 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://mbtamuli.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://mbtamuli.github.io/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuring Postfix</title>
       <link>http://mbtamuli.github.io/blog/configuring-postfix/</link>
       <pubDate>Sun, 30 Dec 2018 00:00:00 +0000</pubDate>
-      
       <guid>http://mbtamuli.github.io/blog/configuring-postfix/</guid>
-      <description>I came across this really neat Docker image docker-postfix. It got me up and running with Postfix in a very short amount of time.
-I&amp;rsquo;m just mentioning the extra steps I had to take to get the TLS certificates and the DKIM keys. As this is a post of configuring Postfix running as a Docker container, I&amp;rsquo;ll also run all the setup steps inside containers.
-First let&amp;rsquo;s create a directory for all our files and pull all the images</description>
+      <description>&lt;p&gt;I came across this really neat Docker image
+&lt;a href=&#34;https://github.com/catatnight/docker-postfix&#34;&gt;docker-postfix&lt;/a&gt;. It got me up
+and running with Postfix in a very short amount of time.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m just mentioning the extra steps I had to take to get the TLS certificates
+and the DKIM keys. As this is a post of configuring Postfix running as a
+&lt;strong&gt;Docker&lt;/strong&gt; container, I&amp;rsquo;ll also run all the setup steps inside containers.&lt;/p&gt;
+&lt;p&gt;First let&amp;rsquo;s create a directory for all our files and pull all the images&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Postfix in a container</title>
       <link>http://mbtamuli.github.io/blog/postfix-in-a-container/</link>
       <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
-      
       <guid>http://mbtamuli.github.io/blog/postfix-in-a-container/</guid>
-      <description>Postfix is a service which forks itself and runs in the background. Postfix version 3.3.0 added container support. There was an issue where Postfix could not run as PID=1, and it was swiftly fixed in version 3.3.1
-As I could not find any official Docker image for the latest versin of Postfix, I decided to build one myself. At the time I built the image, there was no Debian package available so I had to compile the package from source.</description>
+      <description>&lt;p&gt;Postfix is a service which forks itself and runs in the background. Postfix
+version &lt;a href=&#34;http://www.postfix.org/announcements/postfix-3.3.0.html&#34;&gt;3.3.0 added container support&lt;/a&gt;.
+There was an issue where Postfix could not run as &lt;em&gt;PID=1&lt;/em&gt;, and it was swiftly
+&lt;a href=&#34;http://www.postfix.org/announcements/postfix-3.3.1.html&#34;&gt;fixed in version 3.3.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As I could not find any official Docker image for the latest versin of Postfix,
+I decided to build one myself. At the time I built the image, there was no
+Debian package available so I had to compile the package &lt;a href=&#34;http://cdn.postfix.johnriley.me/mirrors/postfix-release/index.html&#34;&gt;from source&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
