@@ -14,3 +14,8 @@
         crossorigin="anonymous"
         async>
 </script>
+
+<script>
+        var theme = localStorage.getItem('appearance') == 'light' ? 'light' : 'dark_dimmed';
+        document.querySelector('script[src="https://giscus.app/client.js"]').setAttribute('data-theme', theme);
+</script>

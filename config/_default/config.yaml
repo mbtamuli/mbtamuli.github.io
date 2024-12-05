@@ -51,26 +51,32 @@ outputs:
         - JSON
 
 params:
-    env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    author: mbtamuli
-    defaultTheme: light
-    disableThemeToggle: false
-    ShowShareButtons: true
-    ShowReadingTime: true
-    disableSpecial1stPost: true
-    displayFullLangName: true
-    ShowPostNavLinks: true
-    ShowBreadCrumbs: true
-    ShowCodeCopyButtons: true
-    ShowRssButtonInSectionTermList: true
-    ShowToc: true
-    socialIcons:
-        - name: github
-          url: "https://github.com/mbtamuli"
-        - name: twitter
-          url: "https://twitter.com/mbtamuli"
-    mainSections:
-      - blog
+  profileMode:
+    enabled: true
+    subtitle: "A digital scratchpad of my thoughts and ideas."
+    buttons:
+      - name: Blog
+        url: /blog/
+      - name: Github
+        url: "https://github.com/"
+  socialIcons:
+    - name: github
+      url: "https://github.com/mbtamuli"
+    - name: twitter
+      url: "https://twitter.com/mbtamuli"
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  author: mbtamuli
+  comments: true
+  defaultTheme: auto
+  ShowShareButtons: true
+  ShowReadingTime: true
+  disableSpecial1stPost: true
+  displayFullLangName: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true
 
 markup:
     goldmark:
