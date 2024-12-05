@@ -2,13 +2,14 @@ baseURL: "http://mbtamuli.github.io/"
 languageCode: "en-us"
 title: "mbtamuli's scratchpad"
 theme:
-  - "github.com/adityatelange/hugo-PaperMod"
+  - github.com/adityatelange/hugo-PaperMod
 
 permalinks:
     blog: /:section/:slug/
 
 # To disable, set to an extremely large value, such as 999999
-paginate: 5
+pagination:
+  pagerSize: 5
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
