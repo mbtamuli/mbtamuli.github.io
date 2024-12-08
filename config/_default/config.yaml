@@ -69,6 +69,7 @@ params:
   author: mbtamuli
   comments: true
   defaultTheme: auto
+  disableThemeToggle: true
   ShowShareButtons: true
   ShowReadingTime: true
   disableSpecial1stPost: true
