@@ -6,6 +6,7 @@ title: "mbtamuli's scratchpad"
 #theme:
 #  - github.com/adityatelange/hugo-PaperMod
 
+# Using Hugo module - https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme
 module:
   imports:
   - path: github.com/adityatelange/hugo-PaperMod
