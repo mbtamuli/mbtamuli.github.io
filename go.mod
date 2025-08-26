@@ -1,5 +1,5 @@
 module github.com/mbtamuli/mbtamuli.github.io
 
-go 1.23
+go 1.24
 
-require github.com/adityatelange/hugo-PaperMod v0.0.0-20241109160605-3e5362100777 // indirect
+require github.com/adityatelange/hugo-PaperMod v0.0.0-20250524045829-5a4651783fa9 // indirect
