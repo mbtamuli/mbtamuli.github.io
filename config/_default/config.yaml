@@ -4,6 +4,10 @@ title: "mbtamuli's scratchpad"
 theme:
   - github.com/adityatelange/hugo-PaperMod
 
+caches:
+  images:
+    dir: :cacheDir/images
+
 permalinks:
     blog: /:section/:slug/
 
