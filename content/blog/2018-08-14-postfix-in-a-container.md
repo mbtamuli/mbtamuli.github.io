@@ -1,9 +1,11 @@
 ---
+title: "Postfix in a container"
+date: "2018-08-14T00:00:00Z"
+description: "Building and running Postfix mail server in a Docker container with container support introduced in version 3.3.0"
+summary: "Creating a custom Docker image for Postfix mail server since no official image was available for the latest version"
 categories:
 - linux
 - docker
-date: "2018-08-14T00:00:00Z"
-title: Postfix in a container
 ---
 Postfix is a service which forks itself and runs in the background. Postfix
 version [3.3.0 added container support][1].

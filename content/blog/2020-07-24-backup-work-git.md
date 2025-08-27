@@ -1,9 +1,11 @@
 ---
+title: "Backup files to git repo before shutdown"
+date: "2020-07-24T00:00:00Z"
+description: "Automated solution to backup dotfiles and work files to a git repository using systemd services before system shutdown"
+summary: "Simple setup to automatically push important files to a remote git repository before shutting down the system"
+slug: backup-work-git
 categories:
 - linux
-date: "2020-07-24T00:00:00Z"
-title: Backup files to git repo before shutdown
-slug: backup-work-git
 ---
 
 I have a few files that I want to push to a remote repository just before shutdown. It could be many use cases, but mine is, I want my dotfiles synced to [mbtamuli/dotfiles](https://github.com/mbtamuli/dotfiles).

@@ -1,9 +1,11 @@
 ---
+title: "Configuring Postfix"
+date: "2018-12-30T00:00:00Z"
+description: "Complete guide to configuring Postfix mail server in Docker with TLS certificates and DKIM keys setup"
+summary: "Setting up a secure Postfix mail server using Docker containers with proper TLS and DKIM configuration"
 categories:
 - linux
 - docker
-date: "2018-12-30T00:00:00Z"
-title: Configuring Postfix
 ---
 I came across this really neat Docker image
 [docker-postfix](https://github.com/catatnight/docker-postfix). It got me up

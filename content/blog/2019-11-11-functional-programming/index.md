@@ -1,9 +1,11 @@
 ---
+title: "Why Functional Programming Matters"
+date: "2019-11-11T00:00:00Z"
+description: "Exploring the importance and benefits of functional programming based on John Hughes' influential 1984 paper"
+summary: "A deep dive into functional programming paradigm and why it matters, inspired by John Hughes' seminal paper"
+excerpt_separator: <!--more-->
 categories:
 - random
-date: "2019-11-11T00:00:00Z"
-excerpt_separator: <!--more-->
-title: Why Functional Programming Matters
 ---
 
 This article will be my take on why functional programming matters, largely with a focus on the paper with the same name, authored by John Hughes in the year 1984 - [Link to the paper](https://github.com/papers-we-love/papers-we-love/blob/master/languages-paradigms/functional_programming/why-functional-programming-matters.pdf).
