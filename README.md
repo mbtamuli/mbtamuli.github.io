@@ -14,6 +14,6 @@ Then visit http://localhost:1313/
 
 # Deployment
 
-[![github pages](https://github.com/mbtamuli/mbtamuli.github.io/actions/workflows/gh-pages.yaml/badge.svg)](https://github.com/mbtamuli/mbtamuli.github.io/actions/workflows/gh-pages.yaml)
+[![Build and deploy](https://github.com/mbtamuli/mbtamuli.github.io/actions/workflows/hugo.yaml/badge.svg)](https://github.com/mbtamuli/mbtamuli.github.io/actions/workflows/hugo.yaml)
 
 Deployment is taken care of by GitHub Actions. A custom domain, `mriyam.dev` is configured for the site.
