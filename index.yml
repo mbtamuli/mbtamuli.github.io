@@ -1,0 +1,15 @@
+layout: layouts/base.vto
+header:
+  title: mriyam.dev
+  description: Personal home on the web.
+  avatar: /avatar.jpg
+metas:
+  title: =header.title
+  description: =header.description
+  image: =header.avatar
+links:
+  - text: Visit my digital garden
+    href: https://garden.mriyam.dev
+    type: ''
+footer: ''
+extra_head: ''
