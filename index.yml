@@ -8,8 +8,11 @@ metas:
   description: =header.description
   image: =header.avatar
 links:
-  - text: Visit my digital garden
-    href: https://garden.mriyam.dev
+  - text: Blog
+    href: https://blog.mriyam.dev
     type: ''
+  - text: GitHub
+    href: 'https://github.com/mbtamuli/'
+    type: github
 footer: ''
 extra_head: ''
